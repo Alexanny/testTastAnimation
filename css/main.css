@@ -1,0 +1,21 @@
+body {
+  margin: 0 auto;
+  background-color: #111111;
+  position: relative;
+}
+#root {
+  height: 300px;
+  width: 300px;
+  position: fixed;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.line {
+  display: block;
+  position: absolute;
+  width: 3px;
+  height: 45px;
+  background-color: #191e1f;
+}
