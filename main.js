@@ -1,5 +1,7 @@
 (() => {
   const NUMBER_OF_LINES = 26;
+  const textRef = document.querySelector(".textContent");
+  const lines = document.querySelectorAll(".line");
   const COLORS = {
     static: "#191e1f",
     active: "#6CB7C1",
@@ -23,8 +25,6 @@
     container.appendChild(line);
   }
 
-  const lines = document.querySelectorAll(".line");
-
   const updateLinesColor = (count) => {
     const countLines = lines.length;
     lines.forEach((line, idx) => {
@@ -38,19 +38,25 @@
 
   document.addEventListener("scroll", () => {
     const scrollStep = (document.body.offsetHeight - window.innerHeight) / 5;
+    let fillPercentage = 0;
 
     if (window.scrollY >= scrollStep * 5) {
-      updateLinesColor(NUMBER_OF_LINES);
+      fillPercentage = 1;
     } else if (window.scrollY > scrollStep * 4) {
-      updateLinesColor(NUMBER_OF_LINES * 0.8);
+      fillPercentage = 0.8;
     } else if (window.scrollY > scrollStep * 3) {
-      updateLinesColor(NUMBER_OF_LINES * 0.6);
+      fillPercentage = 0.6;
     } else if (window.scrollY > scrollStep * 2) {
-      updateLinesColor(NUMBER_OF_LINES * 0.4);
+      fillPercentage = 0.4;
     } else if (window.scrollY > scrollStep) {
-      updateLinesColor(NUMBER_OF_LINES * 0.2);
-    } else {
-      updateLinesColor(0);
+      fillPercentage = 0.2;
     }
+    updateLinesColor(NUMBER_OF_LINES * fillPercentage);
+
+    const textContent = textRef.textContent.trim();
+    const activeTextIdxEnd = Math.floor(textContent.length * fillPercentage);
+    const activeText = textContent.slice(0, activeTextIdxEnd);
+    const defaultText = textContent.slice(activeTextIdxEnd);
+    textRef.innerHTML = `<span class="textContentActive">${activeText}</span>${defaultText}`;
   });
 })();
