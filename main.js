@@ -1,7 +1,6 @@
 (() => {
   const NUMBER_OF_LINES = 26;
   const textRef = document.querySelector(".textContent");
-  const lines = document.querySelectorAll(".line");
   const COLORS = {
     static: "#191e1f",
     active: "#6CB7C1",
@@ -25,6 +24,7 @@
     container.appendChild(line);
   }
 
+  const lines = document.querySelectorAll(".line");
   const updateLinesColor = (count) => {
     const countLines = lines.length;
     lines.forEach((line, idx) => {
